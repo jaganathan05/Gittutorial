@@ -1,57 +1,59 @@
-var itemlist= document.querySelector("#items");
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
 
-//parentelement 
-console.log(itemlist.parentElement);
+// form submit event
+form.addEventListener('submit', addItem);
 
-//Lastelementchild 
-console.log(itemlist.lastElementChild);
+// del event
+itemList.addEventListener('click', handleItemClick);
 
-//lastchild 
-console.log(itemlist.lastChild);
+// add item
+function addItem(e) {
+  e.preventDefault();
 
-//createchild 
-console.log(itemlist.createChild="item5"); 
+  // Get input value
+  var newItem = document.getElementById('item').value;
 
-//firstelementchild 
-console.log(itemlist.firstElementChild); 
+  // Create new li element
+  var li = document.createElement('li');
+  // Add class
+  li.className = 'list-group-item';
+  // Add text node with input value
+  li.appendChild(document.createTextNode(newItem));
 
-//firstchild 
-console.log(itemlist.firstChild);
+  // Add delete button
+  var deleteBtn = document.createElement('button');
+  // Add classes to delete button
+  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+  // Append text node
+  deleteBtn.appendChild(document.createTextNode('X'));
 
-//next sibiling 
-console.log(itemlist.nextSibling);
+  // Add edit button
+  var editBtn = document.createElement('button');
+  // Add classes to edit button
+  editBtn.className = 'btn btn-primary btn-sm float-right edit';
+  // Append text node
+  editBtn.appendChild(document.createTextNode('Edit'));
 
-//next element sibiling 
-console.log(itemlist.nextElementSibling);
+  // Append delete button to li
+  li.appendChild(deleteBtn);
 
-//previous sibiling 
-console.log(itemlist.previousSibling);
+  // Append edit button to li
+  li.appendChild(editBtn);
 
-//previous element sibiling 
-console.log(itemlist.previousElementSibling);
+  // Append li to list
+  itemList.appendChild(li);
+}
 
-//create element
-var newdiv=document.createElement('div');
-newdiv.className="Hello"
-newdiv.id="hello"
-console.log(newdiv);
-
-
-//set attribute
-newdiv.setAttribute('title',"Hello");
-console.log(newdiv);
-
-//create text node
-var newtext=document.createTextNode("HELLo");
-
-//append child
-newdiv.appendChild(newtext); 
-
-var container=document.querySelector('header .container');
-var h1=document.querySelector('header h1');
-
-container.insertBefore(newdiv,h1); 
-
-var newItem = document.createElement('li');
-newItem.textContent = "Hello World";
-itemlist.insertBefore(newItem, itemlist.firstElementChild);
+function handleItemClick(e) {
+  if (e.target.classList.contains('delete')) {
+    if (confirm('Are you sure you want to delete this item?')) {
+      var li = e.target.parentElement;
+      itemList.removeChild(li);
+    }
+  }
+  if (e.target.classList.contains('edit')) {
+    // Handle edit functionality here
+    console.log('Edit button clicked');
+  }
+}
