@@ -1,29 +1,57 @@
-// console.log("hello world!");
-//  var items=document.getElementsByClassName("list-group-item");
-// //console.log(items[2]);
-// items[2].style.backgroundColor="green"
-// for(let i=0; i<=items.length-1 ; i++){
-//     items[i].style.fontWeight='bold'
-// }
+var itemlist= document.querySelector("#items");
 
-// console.log(document.getElementsByClassName("list-group-item"))
-// var tag_of_items=document.getElementsByTagName("li") ;
-//  console.log(tag_of_items);
-// for (let i=0;i<=tag_of_items.length-1;i++){
-//     tag_of_items[i].style.fontSize='30px' 
-//     tag_of_items[i].style.color="orange"
-// }
-var second_item=(document.querySelector('.list-group-item:nth-child(2)')); 
-second_item.style.backgroundColor="green"
+//parentelement 
+console.log(itemlist.parentElement);
 
-var third_item=(document.querySelector('.list-group-item:nth-child(3)'));
-third_item.style.display="none"
+//Lastelementchild 
+console.log(itemlist.lastElementChild);
 
-var items=document.querySelectorAll("li");
-items[1].style.color="green" 
+//lastchild 
+console.log(itemlist.lastChild);
 
-var odd=document.querySelectorAll("li:nth-child(odd)");
-for (let i=0;i<odd.length;i++){
-    odd[i].style.backgroundColor="green"
-}
+//createchild 
+console.log(itemlist.createChild="item5"); 
 
+//firstelementchild 
+console.log(itemlist.firstElementChild); 
+
+//firstchild 
+console.log(itemlist.firstChild);
+
+//next sibiling 
+console.log(itemlist.nextSibling);
+
+//next element sibiling 
+console.log(itemlist.nextElementSibling);
+
+//previous sibiling 
+console.log(itemlist.previousSibling);
+
+//previous element sibiling 
+console.log(itemlist.previousElementSibling);
+
+//create element
+var newdiv=document.createElement('div');
+newdiv.className="Hello"
+newdiv.id="hello"
+console.log(newdiv);
+
+
+//set attribute
+newdiv.setAttribute('title',"Hello");
+console.log(newdiv);
+
+//create text node
+var newtext=document.createTextNode("HELLo");
+
+//append child
+newdiv.appendChild(newtext); 
+
+var container=document.querySelector('header .container');
+var h1=document.querySelector('header h1');
+
+container.insertBefore(newdiv,h1); 
+
+var newItem = document.createElement('li');
+newItem.textContent = "Hello World";
+itemlist.insertBefore(newItem, itemlist.firstElementChild);
