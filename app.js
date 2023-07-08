@@ -26,6 +26,24 @@ function getacall(event) {
   localStorage.setItem('user', JSON.stringify(userDetails));
   //console.log(localStorage);
 
+  // Retrieve existing user details from local storage
+  var existingDetails = localStorage.getItem('userDetails');
+
+  if (existingDetails) {
+
+  // If there are existing user details, parse and update the array
+  existingDetails = JSON.parse(existingDetails);
+  existingDetails.push(userDetails);
+  localStorage.setItem('userDetails', JSON.stringify(existingDetails));
+  
+} else {
+
+  // If there are no existing user details, create a new array with the current user details
+  var newDetails = [userDetails];
+  localStorage.setItem('userDetails', JSON.stringify(newDetails));
+  
+}
+
   // Retrieve and log the stored user details
   var storedUser = JSON.parse(localStorage.getItem('user'));
   console.log(storedUser);
