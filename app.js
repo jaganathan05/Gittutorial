@@ -36,6 +36,36 @@ function getacall(event) {
       "<p>Phone Number: " + phoneNumber + "</p>" +
       "<p>Time for Call: " + date + " " + time + "</p>";
 
+  // create edit Button
+  var Editbutton =document.createElement("button");
+  Editbutton.textContent="Edit";
+  Editbutton.addEventListener('click',function(){
+    // Set the form values to the stored user details for editing
+    document.getElementById('name').value = userDetails.name;
+    document.getElementById('email').value = userDetails.email;
+    document.getElementById('tel').value = userDetails.phoneNumber;
+    document.getElementById('date').value = userDetails.date;
+    document.getElementById('time').value = userDetails.time;
+    userDetailsContainer.remove(); // Remove the userDetailsContainer from the DOM
+
+      // Retrieve existing user details from local storage
+      var storedDetails = JSON.parse(localStorage.getItem('userDetails'));
+
+      // Find the index of the user details to be deleted
+      var index = storedDetails.findIndex(function (detail) {
+          return detail.name === name && detail.email === email && detail.phoneNumber === phoneNumber;
+      });
+
+      if (index !== -1) {
+          // Remove the user details from the stored array
+          storedDetails.splice(index, 1);
+          localStorage.setItem('userDetails', JSON.stringify(storedDetails));
+      }
+
+    
+
+  });
+
   // Create a delete button
   var deleteButton = document.createElement("button");
   deleteButton.textContent = "Delete";
@@ -59,6 +89,7 @@ function getacall(event) {
 
   // Append the delete button to the userDetailsContainer
   userDetailsContainer.appendChild(deleteButton);
+  userDetailsContainer.appendChild(Editbutton);
 
   document.body.appendChild(userDetailsContainer);
 }
